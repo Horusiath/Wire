@@ -10,6 +10,11 @@ namespace Wire.Tests.Performance.Deserialization
 #if !NBENCH
         public ByteArrayDeserializationBenchmark(ITestOutputHelper output) : base(output) { }
 #endif
+        public override void Setup(BenchmarkContext context)
+        {
+            base.Setup(context);
+            InitStreamWith(new byte[] { 123, 134, 11, 122, 1 });
+        }
 
         [NBenchFact]
         [PerfBenchmark(
@@ -17,12 +22,11 @@ namespace Wire.Tests.Performance.Deserialization
             NumberOfIterations = StandardIterationCount,
             RunMode = RunMode.Throughput,
             RunTimeMilliseconds = StandardRunTime,
-            TestMode = TestMode.Test,
-            Skip = "FIXME: counter is not working")]
-        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 1600000)]
+            TestMode = TestMode.Test)]
+        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 4000000)]
         public void Deserialize_ByteArray()
         {
-            InitStreamWith(new byte[] { 123, 134, 11, 122, 1 });
+            Stream.Position = 0; // don't move it up to Setup, I don't know why it needed here to work
             DeserializeAndCount<byte[]>();
         }
     }
@@ -46,11 +50,11 @@ namespace Wire.Tests.Performance.Deserialization
             NumberOfIterations = StandardIterationCount,
             RunMode = RunMode.Throughput,
             RunTimeMilliseconds = StandardRunTime,
-            TestMode = TestMode.Test,
-            Skip = "FIXME: counter is not working")]
-        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 1600000)]
+            TestMode = TestMode.Test)]
+        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 700000)]
         public void Deserialize_StringArray()
         {
+            Stream.Position = 0; // don't move it up to Setup, I don't know why it needed here to work
             DeserializeAndCount<string[]>();
         }
     }
@@ -79,11 +83,11 @@ namespace Wire.Tests.Performance.Deserialization
             NumberOfIterations = StandardIterationCount,
             RunMode = RunMode.Throughput,
             RunTimeMilliseconds = StandardRunTime,
-            TestMode = TestMode.Test,
-            Skip = "FIXME: counter is not working")]
-        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 1600000)]
+            TestMode = TestMode.Test)]
+        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 150000)]
         public void Deserialize_Dictionary()
         {
+            Stream.Position = 0; // don't move it up to Setup, I don't know why it needed here to work
             DeserializeAndCount<Dictionary<string, string>>();
         }
     }
@@ -107,11 +111,11 @@ namespace Wire.Tests.Performance.Deserialization
             NumberOfIterations = StandardIterationCount,
             RunMode = RunMode.Throughput,
             RunTimeMilliseconds = StandardRunTime,
-            TestMode = TestMode.Test,
-            Skip = "FIXME: counter is not working")]
-        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 1600000)]
+            TestMode = TestMode.Test)]
+        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 300000)]
         public void Deserialize_StringList()
         {
+            Stream.Position = 0; // don't move it up to Setup, I don't know why it needed here to work
             DeserializeAndCount<List<string>>();
         }
     }
@@ -135,11 +139,11 @@ namespace Wire.Tests.Performance.Deserialization
             NumberOfIterations = StandardIterationCount,
             RunMode = RunMode.Throughput,
             RunTimeMilliseconds = StandardRunTime,
-            TestMode = TestMode.Test,
-            Skip = "FIXME: counter is not working")]
-        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 1600000)]
+            TestMode = TestMode.Test)]
+        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 80000)]
         public void Deserialize_LinkedList()
         {
+            Stream.Position = 0; // don't move it up to Setup, I don't know why it needed here to work
             DeserializeAndCount<LinkedList<string>>();
         }
     }
@@ -163,11 +167,11 @@ namespace Wire.Tests.Performance.Deserialization
             NumberOfIterations = StandardIterationCount,
             RunMode = RunMode.Throughput,
             RunTimeMilliseconds = StandardRunTime,
-            TestMode = TestMode.Test,
-            Skip = "FIXME: counter is not working")]
-        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 1600000)]
+            TestMode = TestMode.Test)]
+        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 70000)]
         public void Deserialize_HashSet()
         {
+            Stream.Position = 0; // don't move it up to Setup, I don't know why it needed here to work
             DeserializeAndCount<HashSet<string>>();
         }
     }
@@ -191,11 +195,11 @@ namespace Wire.Tests.Performance.Deserialization
             NumberOfIterations = StandardIterationCount,
             RunMode = RunMode.Throughput,
             RunTimeMilliseconds = StandardRunTime,
-            TestMode = TestMode.Test,
-            Skip = "FIXME: counter is not working")]
-        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 1600000)]
+            TestMode = TestMode.Test)]
+        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 60000)]
         public void Deserialize_SortedSet()
         {
+            Stream.Position = 0; // don't move it up to Setup, I don't know why it needed here to work
             DeserializeAndCount<SortedSet<string>>();
         }
     }
