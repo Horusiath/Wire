@@ -249,6 +249,7 @@ Target "NBench" <| fun _ ->
                 |> append (sprintf "output-directory=\"%s\"" perfOutput)
                 |> append (sprintf "concurrent=\"%b\"" true)
                 |> append (sprintf "trace=\"%b\"" true)
+                |> append (sprintf "teamcity=\"%b\"" true)
                 |> toText
 
         let result = ExecProcess(fun info -> 

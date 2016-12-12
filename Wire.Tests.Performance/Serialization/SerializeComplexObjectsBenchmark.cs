@@ -39,7 +39,7 @@ namespace Wire.Tests.Performance.Serialization
             RunMode = RunMode.Throughput,
             RunTimeMilliseconds = StandardRunTime,
             TestMode = TestMode.Test)]
-        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 900000)]
+        [CounterThroughputAssertion(TestCounterName, MustBe.GreaterThan, 800000)]
         public void Serialize_Struct()
         {
             SerializeAndCount(_testStruct);
